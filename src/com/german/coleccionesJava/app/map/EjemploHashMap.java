@@ -41,16 +41,6 @@ public class EjemploHashMap {
         boolean b = persona.containsKey("apellidoPaterno");
         System.out.println("b = " + b);
 
-        System.out.println("================================= Entry");
-        for(Map.Entry<String, Object> entry : persona.entrySet()){
-            System.out.println(entry.getKey() + " -> " + entry.getValue());
-        }
-
-        System.out.println("================================= forEach");
-        persona.forEach((llave,valor) ->
-                System.out.println(llave+ " -> " + valor)
-                );
-
         System.out.println("================================= obtener los valores con Collection");
         Collection<Object> valores = persona.values();
         for(Object v:valores){
@@ -62,6 +52,32 @@ public class EjemploHashMap {
         for(String k: llaves){
             System.out.println(k);
         }
+
+        System.out.println("================================= Entry");
+        for(Map.Entry<String, Object> entry : persona.entrySet()){
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+
+        System.out.println("================================= forEach usando keySet");
+        for(String llave: persona.keySet()){
+            Object valor = persona.get(llave);
+
+            if(valor instanceof Map){
+                Map<String, String> direcciones = (Map<String, String>)valor;
+                for(Map.Entry<String,String> direc : direcciones.entrySet()){
+                    System.out.println(direc.getKey() + " -> " + direc.getValue());
+                }
+            }
+            else {
+                System.out.println(llave + " -> " + valor);
+            }
+        }
+
+        System.out.println("================================= forEach lambda");
+        persona.forEach((llave,valor) ->
+                System.out.println(llave+ " -> " + valor)
+                );
+
 
 
         System.out.println("================================= Imprimiendo si el map tiene valores");
